@@ -21,7 +21,10 @@ import {
   ArrowUp,
   Home as HomeIcon,
   Car,
-
+  Facebook,
+  Instagram,
+  Twitter,
+  Youtube,
 } from "lucide-react";
 
 const STYLES = `
