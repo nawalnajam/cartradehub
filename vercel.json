@@ -1,4 +1,5 @@
-
 {
-  "installCommand": "npm install --no-save lightningcss-linux-x64-gnu"
+  "buildCommand": "npm run build",
+  "installCommand": "npm ci && npm install --no-save --platform=linuxmusl --arch=x64 lightningcss @tailwindcss/oxide",
+  "framework": "nextjs"
 }
