@@ -163,7 +163,6 @@ export default function HeroSearch() {
 
             console.log(`✅ Recognized: "${recognizedText}" (confidence: ${Math.round(confidence * 100)}%)`);
 
-            // If confidence is too low, ask to repeat
             if (confidence < 0.5) {
               alert(`I heard "${recognizedText}" but I'm not confident (${Math.round(confidence * 100)}%). Please speak clearly and try again.`);
               setIsProcessing(false);
@@ -179,7 +178,6 @@ export default function HeroSearch() {
               return;
             }
 
-            // Redirect with search
             const searchIntent = detectSearchIntent(recognizedText);
             if (searchIntent) {
               const redirectUrl = buildRedirectUrl(recognizedText);
@@ -341,7 +339,6 @@ export default function HeroSearch() {
     router.push(`/cars/${carId}`);
   };
 
- 
   return (
     <div className="w-full max-w-4xl mx-auto mt-8 px-4">
       <form onSubmit={handleSearch} className="relative">
@@ -355,7 +352,6 @@ export default function HeroSearch() {
           }`}
         />
 
-     
         {(isListening || isProcessing) && (
           <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
             {isListening ? (
@@ -377,11 +373,10 @@ export default function HeroSearch() {
         )}
 
         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-2">
-          {/* Voice Button */}
+          {/* Voice Button - ONLY ONE disabled attribute now */}
           <button
             type="button"
             onClick={toggleVoice}
-            disabled={isProcessing}
             className={`px-4 py-2 rounded-xl font-semibold transition flex items-center gap-2 ${
               isListening
                 ? "bg-red-500 text-white hover:bg-red-600 animate-pulse"
@@ -406,7 +401,7 @@ export default function HeroSearch() {
             </span>
           </button>
 
-        
+          {/* Camera Button */}
           <button
             type="button"
             onClick={() => setShowImageUpload(true)}
@@ -416,7 +411,7 @@ export default function HeroSearch() {
             <Camera size={18} />
           </button>
 
-          
+          {/* Search Button */}
           <button
             type="submit"
             className="bg-gradient-to-r from-sky-500 to-emerald-500 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-lg transition flex items-center gap-2"
@@ -427,7 +422,7 @@ export default function HeroSearch() {
         </div>
       </form>
 
-      
+      {/* Transcript */}
       {transcript && !isListening && !isProcessing && searchQuery && searchQuery !== transcript && (
         <div className="mt-2 text-center">
           <p className="text-white/70 text-sm bg-black/30 backdrop-blur-sm px-4 py-1.5 rounded-full inline-flex items-center gap-2">
@@ -437,6 +432,7 @@ export default function HeroSearch() {
         </div>
       )}
 
+      {/* Recording Status */}
       {isListening && (
         <div className="mt-3 text-center animate-pulse">
           <p className="text-white font-medium text-sm flex items-center justify-center gap-3">
@@ -453,6 +449,7 @@ export default function HeroSearch() {
         </div>
       )}
 
+      {/* Processing Status */}
       {isProcessing && !isListening && (
         <div className="mt-3 text-center">
           <p className="text-blue-400 font-medium text-sm flex items-center justify-center gap-3">
@@ -472,7 +469,7 @@ export default function HeroSearch() {
         <span className="text-yellow-400">⏳ Processing: 2-3 sec</span>
       </p>
 
-     
+      {/* Image Upload Modal */}
       {showImageUpload && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
           <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden">
